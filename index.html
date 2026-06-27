@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Wenhsin Chang — Psychologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:       #A8CCDE;
+      --sky-light: #D6EAF4;
+      --sky-pale:  #EDF6FB;
+      --bg:        #FAF8F5;
+      --sand:      #F0E6D3;
+      --sage:      #7FA68C;
+      --sage-dark: #5A8068;
+      --slate:     #2C3E50;
+      --slate-mid: #4A5E72;
+      --slate-soft:#6B7F92;
+      --white:     #FFFFFF;
+      --radius:    12px;
+      --shadow:    0 4px 28px rgba(44,62,80,.09);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--slate);
+      line-height: 1.7;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(250,248,245,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(168,204,222,.25);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--slate);
+      letter-spacing: .02em;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: .85rem; font-weight: 500; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--slate-soft);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--sage-dark); }
+    .nav-cta {
+      background: var(--sky); color: var(--slate) !important;
+      padding: 9px 22px; border-radius: 50px;
+      font-weight: 600 !important; transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--sky-light) !important; color: var(--slate) !important; }
+
+    /* ─── LANG TABS ─── */
+    .lang-tabs {
+      display: flex; gap: 4px; margin-bottom: 16px;
+      position: relative; z-index: 10;
+    }
+    .lang-tab {
+      padding: 8px 18px; border-radius: 50px;
+      font-size: .8rem; font-weight: 500; letter-spacing: .04em;
+      border: 1.5px solid var(--sky-light); background: transparent;
+      color: var(--slate-soft); cursor: pointer; transition: all .2s;
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: rgba(168,204,222,.3);
+      touch-action: manipulation;
+    }
+    .lang-tab:hover { border-color: var(--sky); color: var(--slate); }
+    .lang-tab.active {
+      background: var(--sky); border-color: var(--sky);
+      color: var(--slate); font-weight: 600;
+    }
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
+
+    /* ─── DECORATIVE BLOBS ─── */
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+      opacity: .35; pointer-events: none; z-index: 0;
+    }
+    .blob-1 {
+      width: 420px; height: 420px; top: -80px; right: -100px;
+      background: radial-gradient(circle, var(--sky-light) 0%, transparent 70%);
+    }
+    .blob-2 {
+      width: 320px; height: 320px; bottom: -60px; left: -80px;
+      background: radial-gradient(circle, var(--sand) 0%, transparent 70%);
+    }
+    .blob-3 {
+      width: 360px; height: 360px; top: 40%; right: -120px;
+      background: radial-gradient(circle, var(--sky) 0%, transparent 70%);
+      opacity: .2;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 90vh;
+      display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      gap: 44px;
+      background:
+        linear-gradient(135deg, rgba(237,246,251,.3) 0%, rgba(250,248,245,.35) 60%),
+        url('./la-jolla-cove_15077040751_o.jpg') center/cover no-repeat;
+      position: relative; overflow: hidden;
+    }
+    .hero-text {
+      max-width: 540px;
+      background: rgba(250,248,245,.82);
+      backdrop-filter: blur(8px);
+      padding: 36px 32px;
+      border-radius: 20px;
+    }
+    .hero-eyebrow {
+      font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 32px; height: 1.5px; background: var(--sage);
+    }
+    .hero-text h1 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--slate); margin-bottom: 18px;
+    }
+    .hero-text h1 em { font-style: italic; color: var(--sky); }
+    .hero-text p {
+      font-size: 1rem; color: var(--slate-mid);
+      line-height: 1.7; margin-bottom: 24px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--slate); color: var(--white);
+      padding: 14px 32px; border-radius: 50px;
+      font-size: .9rem; font-weight: 500; letter-spacing: .04em;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .15s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--slate-mid); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--slate);
+      padding: 14px 32px; border-radius: 50px;
+      font-size: .9rem; font-weight: 500; letter-spacing: .04em;
+      text-decoration: none; border: 1.5px solid var(--sky);
+      cursor: pointer; transition: background .2s, transform .15s; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--sky-pale); transform: translateY(-1px); }
+
+    /* Hero card */
+    .hero-card {
+      background: var(--white); border-radius: 20px;
+      padding: 24px 22px; box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
+      max-width: 380px;
+    }
+    .hero-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 5px; background: linear-gradient(90deg, var(--sky), var(--sage));
+    }
+    .avatar-placeholder {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky-light), var(--sand));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garant', serif; font-size: 2rem;
+      color: var(--slate-soft); margin-bottom: 20px;
+      border: 3px solid var(--white); box-shadow: 0 2px 12px rgba(168,204,222,.3);
+    }
+    .hero-card h3 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.4rem; font-weight: 600; margin-bottom: 4px;
+    }
+    .hero-card .title { font-size: .82rem; color: var(--sage-dark); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .tag {
+      background: var(--sky-pale); color: var(--slate-mid);
+      font-size: .78rem; font-weight: 500; padding: 5px 14px; border-radius: 50px;
+      border: 1px solid var(--sky-light);
+    }
+    .card-stats { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--sky-pale); }
+    .stat-num { font-family: 'Cormorant Garant', serif; font-size: 2rem; font-weight: 600; color: var(--slate); line-height: 1; }
+    .stat-label { font-size: .75rem; color: var(--slate-soft); margin-top: 2px; }
+
+    /* ─── WAVE DIVIDER ─── */
+    .wave { display: block; width: 100%; line-height: 0; overflow: hidden; }
+
+    /* ─── SECTIONS COMMON ─── */
+    section { padding: 56px 48px; }
+    .section-label {
+      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; display: inline-block; height: 1px; width: 40px;
+      background: linear-gradient(90deg, var(--sage), transparent);
+    }
+    .section-title {
+      font-family: 'Cormorant Garant', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300; color: var(--slate); line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-sub { font-size: 1rem; color: var(--slate-mid); font-weight: 300; max-width: 560px; line-height: 1.8; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 32px; }
+    .about-bio p { color: var(--slate-mid); font-weight: 300; line-height: 1.9; margin-bottom: 16px; }
+    .philosophy-box {
+      background: var(--sky-pale); border-radius: var(--radius);
+      padding: 22px 24px; border-left: 3px solid var(--sky); margin-top: 18px;
+    }
+    .philosophy-box p {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.2rem; font-style: italic; color: var(--slate); line-height: 1.6;
+    }
+    .approach-cards { display: flex; flex-direction: column; gap: 12px; }
+    .approach-card {
+      background: var(--bg); border-radius: var(--radius);
+      padding: 22px 24px; border: 1px solid var(--sky-light);
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .approach-card:hover { box-shadow: var(--shadow); border-color: var(--sky); }
+    .approach-card h4 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; color: var(--slate);
+    }
+    .approach-card p { font-size: .88rem; color: var(--slate-soft); line-height: 1.7; font-weight: 300; }
+
+    /* ─── EXPERIENCE ─── */
+    #experience { background: var(--bg); }
+    .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; }
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 1.5px; background: linear-gradient(to bottom, var(--sky), transparent);
+    }
+    .timeline-item { padding-left: 28px; position: relative; margin-bottom: 24px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -5px; top: 7px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--sky); border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--sky-light);
+    }
+    .timeline-year { font-size: .75rem; color: var(--sage); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+    .timeline-title { font-family: 'Cormorant Garant', serif; font-size: 1.1rem; font-weight: 600; color: var(--slate); margin-bottom: 4px; }
+    .timeline-place { font-size: .85rem; color: var(--slate-soft); font-weight: 300; }
+
+    .credentials { display: flex; flex-direction: column; gap: 12px; }
+    .credential-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 20px 22px; border: 1px solid var(--sky-light);
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .credential-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow); border-color: var(--sky);
+    }
+    .cred-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--sky-pale); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; font-size: 1.1rem;
+    }
+    .cred-body h5 { font-family: 'Cormorant Garant', serif; font-size: 1rem; font-weight: 600; color: var(--slate); margin-bottom: 3px; }
+    .cred-body p { font-size: .8rem; color: var(--slate-soft); font-weight: 300; }
+
+    /* ─── BOOKING ─── */
+    #booking {
+      background: linear-gradient(135deg, var(--sky-pale) 0%, var(--sand) 100%);
+    }
+    .booking-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 32px;
+    }
+    .booking-info p { color: var(--slate-mid); font-weight: 300; line-height: 1.9; margin-bottom: 24px; }
+    .info-items { display: flex; flex-direction: column; gap: 12px; }
+    .info-item { display: flex; align-items: center; gap: 12px; font-size: .9rem; color: var(--slate-mid); }
+    .info-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sky); flex-shrink: 0; }
+    .booking-form {
+      background: var(--white); border-radius: 20px;
+      padding: 32px 28px; box-shadow: var(--shadow);
+    }
+    .booking-form h3 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.6rem; font-weight: 400; margin-bottom: 28px; color: var(--slate);
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: .8rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); margin-bottom: 7px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid var(--sky-light); border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: .92rem; color: var(--slate);
+      background: var(--bg); transition: border-color .2s, box-shadow .2s;
+      outline: none; appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sky); box-shadow: 0 0 0 3px rgba(168,204,222,.2);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .gcal-btn {
+      width: 100%; margin-top: 8px; padding: 15px;
+      background: var(--slate); color: var(--white); border: none;
+      border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-size: .9rem; font-weight: 500; letter-spacing: .04em;
+      cursor: pointer; transition: background .2s, transform .15s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .gcal-btn:hover { background: var(--slate-mid); transform: translateY(-1px); }
+    .gcal-note { font-size: .75rem; color: var(--slate-soft); text-align: center; margin-top: 12px; }
+    .gcal-note svg { vertical-align: middle; margin-right: 4px; }
+
+    /* ─── SUCCESS TOAST ─── */
+    .toast {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      background: var(--slate); color: var(--white);
+      padding: 16px 24px; border-radius: 12px; font-size: .9rem;
+      box-shadow: 0 8px 32px rgba(44,62,80,.2);
+      display: flex; align-items: center; gap: 10px;
+      transform: translateY(80px); opacity: 0;
+      transition: transform .3s, opacity .3s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--slate); color: rgba(255,255,255,.55);
+      padding: 40px 48px; text-align: center;
+      font-size: .82rem; line-height: 1.9;
+    }
+    footer a { color: var(--sky-light); text-decoration: none; }
+    footer strong { color: rgba(255,255,255,.8); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      nav { padding: 14px 20px; }
+      .nav-logo { font-size: 1.1rem; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-cta { padding: 8px 16px; font-size: .8rem; }
+      .about-grid, .experience-grid, .booking-inner { grid-template-columns: 1fr; }
+      #hero { padding: 80px 20px 36px; gap: 28px; min-height: auto; }
+      section { padding: 36px 20px; }
+      .hero-text h1 { font-size: 2rem; }
+      .hero-card { max-width: 100%; }
+      .card-stats { gap: 16px; flex-wrap: wrap; }
+      .stat-num { font-size: 1.5rem; }
+      .tag-list { gap: 6px; }
+      .tag { font-size: .72rem; padding: 4px 10px; }
+      .form-row { grid-template-columns: 1fr; }
+      .blob { display: none; }
+      .section-title { font-size: 1.6rem; }
+      .section-sub { font-size: .9rem; }
+      .approach-card { padding: 16px 18px; }
+      .approach-card h4 { font-size: 1rem; }
+      .credential-card { padding: 16px 18px; }
+      .booking-form { padding: 24px 20px; }
+      .booking-form h3 { font-size: 1.3rem; margin-bottom: 20px; }
+      .gcal-btn { padding: 14px; font-size: .85rem; }
+      .form-group select { appearance: menulist; }
+      .form-group input, .form-group select, .form-group textarea { font-size: 16px; }
+      .btn-primary, .btn-outline { padding: 12px 24px; font-size: .85rem; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-outline { text-align: center; }
+      .philosophy-box p { font-size: 1rem; }
+      .lang-tab { padding: 10px 16px; font-size: .8rem; min-height: 44px; }
+      .wave { height: 32px; }
+      .wave svg { height: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 12px 16px; }
+      #hero { padding: 72px 16px 28px; }
+      section { padding: 28px 16px; }
+      .hero-text h1 { font-size: 1.7rem; }
+      .hero-eyebrow { font-size: .7rem; }
+      .about-grid { gap: 24px; }
+      .experience-grid { gap: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">Dr. Wenhsin Chang</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Background</a>
+    <a href="#booking" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Licensed Psychologist · California</div>
+    <h1>A space where <em>healing</em> begins with being heard</h1>
+    <p>I offer thoughtful, culturally responsive online therapy for adults navigating anxiety, trauma, life transitions, and cross-cultural experiences. Together, we'll work at a pace that feels right for you.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Request a Phone Consultation</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- WAVE -->
+<svg class="wave" viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z" fill="#ffffff"/>
+</svg>
+
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="container">
+
+    <div class="lang-tabs" data-group="about">
+      <button class="lang-tab active" data-lang="en">English</button>
+      <button class="lang-tab" data-lang="zh-tw">繁體中文</button>
+      <button class="lang-tab" data-lang="zh-cn">简体中文</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-content active" data-group="about" data-lang="en">
+      <div class="about-grid">
+        <div class="about-bio">
+          <div class="section-label">About Me</div>
+          <h2 class="section-title">Grounded in connection,<br>guided by compassion</h2>
+          <p class="section-sub" style="margin-bottom:16px;">I believe every therapeutic relationship is unique, and I do not take for granted the trust it takes for someone to share their inner world with another person.</p>
+          <p>I grew up in a culture that values "Yuanfen" (&#32227;&#20998;), a concept that reflects the meaningful connections and encounters we experience throughout life. This perspective deeply shapes how I approach therapy. It is an honor to accompany individuals through periods of healing, self-discovery, and growth.</p>
+          <p>In therapy, I strive to create a space that feels safe, collaborative, and affirming. I view people within the broader context of their lived experiences, including the cultural, relational, systemic, and intersectional factors that shape how they understand themselves and navigate the world.</p>
+          <p>I believe individuals are the experts of their own lives. Rather than positioning myself as someone who "has the answers," I work collaboratively with clients to explore patterns, deepen self-understanding, and identify meaningful directions for change. My therapeutic style is grounded in curiosity, compassion, authenticity, and respect for each person's pace and experiences.</p>
+          <div class="philosophy-box">
+            <p>"I also value the connection between the mind and body. Sometimes emotions and experiences are carried not only through thoughts, but also physically within the body. Creativity and body-based approaches can offer additional pathways toward understanding and healing."</p>
+          </div>
+        </div>
+        <div>
+          <div class="hero-card" style="margin-bottom: 16px;">
+            <div class="avatar-placeholder">W</div>
+            <h3>Dr. Wenhsin Chang</h3>
+            <div style="font-size:.82rem; color:var(--slate-soft); font-weight:400; margin-bottom:6px;">She / Her / Hers</div>
+            <div class="title">Ph.D. · Counseling Psychology</div>
+            <div class="tag-list">
+              <span class="tag">Anxiety & Trauma</span>
+              <span class="tag">Cross-Cultural</span>
+              <span class="tag">Identity</span>
+              <span class="tag">EMDR</span>
+              <span class="tag">EFT / Tapping</span>
+              <span class="tag">Mindfulness</span>
+            </div>
+            <div class="card-stats">
+              <div>
+                <div class="stat-num">CA</div>
+                <div class="stat-label">Licensed in California</div>
+              </div>
+              <div>
+                <div class="stat-num">3</div>
+                <div class="stat-label">Languages</div>
+              </div>
+              <div>
+                <div class="stat-num">Online</div>
+                <div class="stat-label">Telehealth Sessions</div>
+              </div>
+            </div>
+          </div>
+          <div class="approach-cards">
+            <div class="approach-card">
+              <h4>Integrative &amp; Relational Approach</h4>
+              <p>Drawing on relational, somatic, and culturally responsive frameworks, I work collaboratively to explore patterns, deepen self-understanding, and identify meaningful directions for change.</p>
+            </div>
+            <div class="approach-card">
+              <h4>EMDR (Eye Movement Desensitization &amp; Reprocessing)</h4>
+              <p>A structured approach to processing traumatic memories and reducing their emotional charge, helping the mind and body integrate difficult experiences.</p>
+            </div>
+            <div class="approach-card">
+              <h4>Clinical EFT / Tapping</h4>
+              <p>Emotional Freedom Techniques combine gentle tapping on acupressure points with focused attention to support emotional processing and regulation.</p>
+            </div>
+            <div class="approach-card">
+              <h4>Mindfulness &amp; Body Awareness</h4>
+              <p>Incorporating grounding, mindfulness, and body-based awareness into therapy to support emotional regulation and present-moment connection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL CHINESE -->
+    <div class="lang-content" data-group="about" data-lang="zh-tw">
+      <p class="section-sub">我認為每一段關係、每一次相遇，都值得被珍惜，而並非被視為理所當然。</p>
+      <div class="about-grid">
+        <div class="about-bio">
+          <p>「相逢即是有緣」這句話，是我在與人相處時很努力奉行的一個觀點。進到諮商室裡，將自己的內在世界分享給另一個人，本身並不是一件容易的事。有時，它甚至違反了我們在受傷或覺得脆弱時想躲起來的念頭。而被允許陪伴一個人走過療癒、自我理解與成長的過程，對我而言是一件很珍貴的事情。</p>
+          <p>在諮商過程中，我會嘗試著與案主一起建立一個安全、而且可以做自己的空間。我們每個人的家庭、關係、社會環境、文化背景，以及不同身份經驗，都會影響著我們如何理解自己，以及如何與他人相處。</p>
+          <p>在諮商室裡，我相信案主比任何人都還要了解自己的生命，以及自己想要前往的方向。我也相信，只有案主最清楚事情背後的脈絡，以及為何有些在外人眼中看似直白的答案對自己並非最優解。因此，我希望能提供一個安全的空間，與案主一起探索與整理內在經驗，理解過去的經驗如何形塑現在的情感、關係與行為模式，並在這樣的理解之中，慢慢產生療癒與改變。</p>
+          <div class="philosophy-box">
+            <p>「我也認為身體和心靈會互相影響。很多經驗並不只單單停留在腦海裡，也會被身體記住。在適合的情況下，我傾向將身體覺察、接地、正念，以及其他經驗式方法融入治療中，協助案主更理解自己的內在經驗與情緒。」</p>
+          </div>
+        </div>
+        <div>
+          <div class="hero-card" style="margin-bottom: 16px;">
+            <div class="avatar-placeholder">W</div>
+            <h3>Dr. Wenhsin Chang</h3>
+            <div style="font-size:.82rem; color:var(--slate-soft); font-weight:400; margin-bottom:6px;">She / Her / Hers</div>
+            <div class="title">Ph.D. · Counseling Psychology</div>
+            <div class="tag-list">
+              <span class="tag">焦慮與創傷</span>
+              <span class="tag">跨文化</span>
+              <span class="tag">自我認同</span>
+              <span class="tag">EMDR</span>
+              <span class="tag">EFT / Tapping</span>
+              <span class="tag">正念</span>
+            </div>
+            <div class="card-stats">
+              <div>
+                <div class="stat-num">CA</div>
+                <div class="stat-label">加州執照</div>
+              </div>
+              <div>
+                <div class="stat-num">3</div>
+                <div class="stat-label">語言</div>
+              </div>
+              <div>
+                <div class="stat-num">線上</div>
+                <div class="stat-label">遠距諮商</div>
+              </div>
+            </div>
+          </div>
+          <div class="approach-cards">
+            <div class="approach-card">
+              <h4>整合式與關係取向治療</h4>
+              <p>結合關係取向、身體經驗與文化敏感的框架，與案主共同探索行為模式，深化自我理解，並找到有意義的改變方向。</p>
+            </div>
+            <div class="approach-card">
+              <h4>EMDR（眼動減敏與歷程更新治療）</h4>
+              <p>一種結構化的方法，用以處理創傷記憶並減輕其情緒影響，協助身心整合困難的經驗。</p>
+            </div>
+            <div class="approach-card">
+              <h4>Clinical EFT（情緒釋放技巧／Tapping）</h4>
+              <p>結合穴位輕拍與專注引導，支持情緒處理與調節的技巧。</p>
+            </div>
+            <div class="approach-card">
+              <h4>正念與身體覺察</h4>
+              <p>將接地、正念與身體覺察融入治療，支持情緒調節與當下的連結。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIMPLIFIED CHINESE -->
+    <div class="lang-content" data-group="about" data-lang="zh-cn">
+      <p class="section-sub">我认为每一段关系、每一次相遇，都值得被珍惜，而不应被视为理所当然。</p>
+      <div class="about-grid">
+        <div class="about-bio">
+          <p>"相逢即是有缘"这句话，是我在与人相处时一直很努力践行的一个信念。走进咨询室，把自己的内在世界分享给另一个人，本身就不是一件容易的事。有时候，它甚至违背了我们在受伤或感到脆弱时，想把自己藏起来的本能。而能够被允许陪伴一个人走过疗愈、自我理解与成长的过程，对我而言一直都是一件很珍贵的事情。</p>
+          <p>在咨询过程中，我会尝试与来访者一起建立一个安全、能够自在做自己的空间。我们每个人的家庭、关系、社会环境、文化背景，以及不同的身份经验，都会影响我们如何理解自己，以及如何与他人相处。</p>
+          <p>在咨询室里，我相信来访者比任何人都更了解自己的生命，以及自己真正想前往的方向。我也相信，只有来访者最清楚事情背后的脉络，以及为什么有些在外人眼中看似直接的答案，对自己而言却未必是最适合的。因此，我希望能够提供一个安全的空间，与来访者一起探索与整理内在经验，理解过去的经历如何塑造了现在的情感、关系与行为模式，并在这样的理解之中，慢慢产生疗愈与改变。</p>
+          <div class="philosophy-box">
+            <p>「我也认为身体和心灵会彼此影响。很多经验并不只是停留在脑海里，也会被身体记住。在适合的情况下，我倾向将身体觉察、接地、正念，以及其他体验式方法融入治疗中，协助来访者更理解自己的内在经验与情绪。」</p>
+          </div>
+        </div>
+        <div>
+          <div class="hero-card" style="margin-bottom: 16px;">
+            <div class="avatar-placeholder">W</div>
+            <h3>Dr. Wenhsin Chang</h3>
+            <div style="font-size:.82rem; color:var(--slate-soft); font-weight:400; margin-bottom:6px;">She / Her / Hers</div>
+            <div class="title">Ph.D. · Counseling Psychology</div>
+            <div class="tag-list">
+              <span class="tag">焦虑与创伤</span>
+              <span class="tag">跨文化</span>
+              <span class="tag">自我认同</span>
+              <span class="tag">EMDR</span>
+              <span class="tag">EFT / Tapping</span>
+              <span class="tag">正念</span>
+            </div>
+            <div class="card-stats">
+              <div>
+                <div class="stat-num">CA</div>
+                <div class="stat-label">加州执照</div>
+              </div>
+              <div>
+                <div class="stat-num">3</div>
+                <div class="stat-label">语言</div>
+              </div>
+              <div>
+                <div class="stat-num">线上</div>
+                <div class="stat-label">远程咨询</div>
+              </div>
+            </div>
+          </div>
+          <div class="approach-cards">
+            <div class="approach-card">
+              <h4>整合式与关系取向治疗</h4>
+              <p>结合关系取向、身体经验与文化敏感的框架，与来访者共同探索行为模式，深化自我理解，并找到有意义的改变方向。</p>
+            </div>
+            <div class="approach-card">
+              <h4>EMDR（眼动减敏与再处理疗法）</h4>
+              <p>一种结构化的方法，用以处理创伤记忆并减轻其情绪影响，协助身心整合困难的经验。</p>
+            </div>
+            <div class="approach-card">
+              <h4>Clinical EFT（情绪释放技巧／Tapping）</h4>
+              <p>结合穴位轻拍与专注引导，支持情绪处理与调节的技巧。</p>
+            </div>
+            <div class="approach-card">
+              <h4>正念与身体觉察</h4>
+              <p>将接地、正念与身体觉察融入治疗，支持情绪调节与当下的连结。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg class="wave" viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,28 C360,0 720,56 1080,28 C1260,14 1380,42 1440,28 L1440,56 L0,56 Z" fill="#FAF8F5"/>
+</svg>
+
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Background &amp; Credentials</div>
+    <h2 class="section-title">Training built on<br>depth and dedication</h2>
+
+    <div class="lang-tabs" data-group="experience">
+      <button class="lang-tab active" data-lang="en">English</button>
+      <button class="lang-tab" data-lang="zh-tw">繁體中文</button>
+      <button class="lang-tab" data-lang="zh-cn">简体中文</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-content active" data-group="experience" data-lang="en">
+      <div class="experience-grid">
+        <div>
+          <p class="section-sub" style="margin-bottom:36px;">
+            Clinical experience across university counseling, community mental health, and diverse treatment settings — shaped by a deep commitment to multiculturalism and culturally responsive care.
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">Doctorate</div>
+              <div class="timeline-title">Ph.D. in Counseling Psychology</div>
+              <div class="timeline-place">University of Wisconsin–Milwaukee</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Master's</div>
+              <div class="timeline-title">M.Ed. in Counseling Psychology</div>
+              <div class="timeline-place">University of Missouri–Columbia</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Bachelor's</div>
+              <div class="timeline-title">Undergraduate Degree</div>
+              <div class="timeline-place">Taiwan</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="credentials">
+          <div class="credential-card">
+            <div class="cred-icon">&#127891;</div>
+            <div class="cred-body">
+              <h5>Doctorate in Counseling Psychology</h5>
+              <p>University of Wisconsin–Milwaukee</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#128203;</div>
+            <div class="cred-body">
+              <h5>Licensed Psychologist</h5>
+              <p>State of California</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#129504;</div>
+            <div class="cred-body">
+              <h5>EMDR Basic Training</h5>
+              <p>Eye Movement Desensitization and Reprocessing</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#9889;</div>
+            <div class="cred-body">
+              <h5>Clinical EFT Levels 1 &amp; 2</h5>
+              <p>Emotional Freedom Techniques / Tapping</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#127760;</div>
+            <div class="cred-body">
+              <h5>Multilingual Services</h5>
+              <p>English, Mandarin Chinese (Traditional &amp; Simplified)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL CHINESE -->
+    <div class="lang-content" data-group="experience" data-lang="zh-tw">
+      <div class="experience-grid">
+        <div>
+          <p class="section-sub" style="margin-bottom:36px;">
+            過去曾於大學諮商中心、社區心理健康，以及不同臨床場域工作，而這些經驗也慢慢形塑了我現在重視關係、文化脈絡與整體經驗的治療風格。
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">博士</div>
+              <div class="timeline-title">諮商心理博士學位</div>
+              <div class="timeline-place">威斯康辛大學密爾瓦基分校（University of Wisconsin–Milwaukee）</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">碩士</div>
+              <div class="timeline-title">諮商心理相關碩士學位</div>
+              <div class="timeline-place">密蘇里大學哥倫比亞分校（University of Missouri–Columbia）</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">學士</div>
+              <div class="timeline-title">大學學位</div>
+              <div class="timeline-place">台灣</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="credentials">
+          <div class="credential-card">
+            <div class="cred-icon">&#127891;</div>
+            <div class="cred-body">
+              <h5>諮商心理博士學位</h5>
+              <p>威斯康辛大學密爾瓦基分校</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#128203;</div>
+            <div class="cred-body">
+              <h5>美國加州執業心理師</h5>
+              <p>加州心理師執照</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#129504;</div>
+            <div class="cred-body">
+              <h5>EMDR 基礎訓練</h5>
+              <p>眼動減敏與歷程更新治療</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#9889;</div>
+            <div class="cred-body">
+              <h5>Clinical EFT 第一與第二階段訓練</h5>
+              <p>情緒釋放技巧／Tapping</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#127760;</div>
+            <div class="cred-body">
+              <h5>多語言服務</h5>
+              <p>英文、中文（繁體與簡體）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIMPLIFIED CHINESE -->
+    <div class="lang-content" data-group="experience" data-lang="zh-cn">
+      <div class="experience-grid">
+        <div>
+          <p class="section-sub" style="margin-bottom:36px;">
+            过去曾于大学咨询中心、社区心理健康，以及不同临床场域工作，而这些经验也逐渐形塑了我如今重视关系、文化脉络与整体经验的治疗风格。
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">博士</div>
+              <div class="timeline-title">咨询心理博士学位</div>
+              <div class="timeline-place">威斯康星大学密尔沃基分校（University of Wisconsin–Milwaukee）</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">硕士</div>
+              <div class="timeline-title">咨询心理相关硕士学位</div>
+              <div class="timeline-place">密苏里大学哥伦比亚分校（University of Missouri–Columbia）</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">学士</div>
+              <div class="timeline-title">大学学位</div>
+              <div class="timeline-place">台湾</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="credentials">
+          <div class="credential-card">
+            <div class="cred-icon">&#127891;</div>
+            <div class="cred-body">
+              <h5>咨询心理博士学位</h5>
+              <p>威斯康星大学密尔沃基分校</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#128203;</div>
+            <div class="cred-body">
+              <h5>美国加州执业心理师</h5>
+              <p>加州心理师执照</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#129504;</div>
+            <div class="cred-body">
+              <h5>EMDR 基础训练</h5>
+              <p>眼动减敏与再处理疗法</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#9889;</div>
+            <div class="cred-body">
+              <h5>Clinical EFT 第一与第二阶段训练</h5>
+              <p>情绪释放技巧／Tapping</p>
+            </div>
+          </div>
+          <div class="credential-card">
+            <div class="cred-icon">&#127760;</div>
+            <div class="cred-body">
+              <h5>多语言服务</h5>
+              <p>英文、中文（繁体与简体）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg class="wave" viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,14 C480,56 960,0 1440,28 L1440,56 L0,56 Z" fill="var(--sky-pale)"/>
+</svg>
+
+<!-- ─── CLINICAL INTERESTS ─── -->
+<section id="interests" style="background: linear-gradient(135deg, var(--sky-pale) 0%, var(--bg) 100%); padding-bottom: 48px;">
+  <div class="container">
+    <div class="section-label">Clinical Areas of Interest</div>
+
+    <div class="lang-tabs" data-group="interests">
+      <button class="lang-tab active" data-lang="en">English</button>
+      <button class="lang-tab" data-lang="zh-tw">繁體中文</button>
+      <button class="lang-tab" data-lang="zh-cn">简体中文</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-content active" data-group="interests" data-lang="en">
+      <h2 class="section-title">Who I work with</h2>
+      <p class="section-sub" style="margin-bottom: 24px;">I consider myself a generalist and enjoy working with a wide range of presenting concerns. I have particular interest and experience in:</p>
+      <div class="tag-list" style="max-width: 700px;">
+        <span class="tag">Trauma</span>
+        <span class="tag">Anxiety</span>
+        <span class="tag">Depression</span>
+        <span class="tag">Identity Development</span>
+        <span class="tag">Relationship Concerns</span>
+        <span class="tag">Self-Criticism</span>
+        <span class="tag">Life Transitions</span>
+        <span class="tag">Cross-Cultural Experiences</span>
+        <span class="tag">Immigration-Related Stress</span>
+        <span class="tag">Belonging</span>
+        <span class="tag">LGBTQ+</span>
+      </div>
+      <p class="section-sub" style="margin-top: 20px;">I am especially passionate about supporting individuals navigating cross-cultural experiences, identity development, immigration-related stress, belonging, and systemic or relational challenges. I have particular experience working with international students, immigrants, Asian and Asian American individuals, LGBTQ+ populations, and individuals from historically marginalized or underserved communities.</p>
+    </div>
+
+    <!-- TRADITIONAL CHINESE -->
+    <div class="lang-content" data-group="interests" data-lang="zh-tw">
+      <h2 class="section-title">我關注的議題</h2>
+      <p class="section-sub" style="margin-bottom: 24px;">我平時接觸的議題很廣，包括：</p>
+      <div class="tag-list" style="max-width: 700px;">
+        <span class="tag">創傷</span>
+        <span class="tag">焦慮</span>
+        <span class="tag">憂鬱</span>
+        <span class="tag">自我認同</span>
+        <span class="tag">人際關係</span>
+        <span class="tag">自我批評</span>
+        <span class="tag">人生轉換</span>
+        <span class="tag">跨文化經驗</span>
+        <span class="tag">移民壓力</span>
+        <span class="tag">歸屬感</span>
+        <span class="tag">LGBTQ+</span>
+      </div>
+      <p class="section-sub" style="margin-top: 20px;">我也特別關注與文化、身份認同、歸屬感、移民壓力，以及制度與關係壓力相關的議題。</p>
+    </div>
+
+    <!-- SIMPLIFIED CHINESE -->
+    <div class="lang-content" data-group="interests" data-lang="zh-cn">
+      <h2 class="section-title">我关注的议题</h2>
+      <p class="section-sub" style="margin-bottom: 24px;">我平时接触的议题很广，包括：</p>
+      <div class="tag-list" style="max-width: 700px;">
+        <span class="tag">创伤</span>
+        <span class="tag">焦虑</span>
+        <span class="tag">抑郁</span>
+        <span class="tag">自我认同</span>
+        <span class="tag">人际关系</span>
+        <span class="tag">自我批评</span>
+        <span class="tag">人生转换</span>
+        <span class="tag">跨文化经验</span>
+        <span class="tag">移民压力</span>
+        <span class="tag">归属感</span>
+        <span class="tag">LGBTQ+</span>
+      </div>
+      <p class="section-sub" style="margin-top: 20px;">我也特别关注与文化、身份认同、归属感、移民压力，以及制度与关系压力相关的议题。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── BOOKING ─── -->
+<section id="booking" style="position:relative; overflow:hidden;">
+  <div class="blob blob-3"></div>
+  <div class="container">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Request a Phone Consultation</h2>
+    <p class="section-sub">A brief phone consultation is a chance for us to connect, discuss what's brought you here, and see if we're a good fit. No pressure, no commitment.</p>
+
+    <div class="booking-inner">
+      <div class="booking-info">
+        <p>Phone consultations are complimentary. All ongoing sessions are conducted online via secure video call.</p>
+        <div class="info-items">
+          <div class="info-item"><div class="info-dot"></div> Online telehealth sessions (secure video)</div>
+          <div class="info-item"><div class="info-dot"></div> English, 繁體中文, 简体中文</div>
+          <div class="info-item"><div class="info-dot"></div> Licensed in California</div>
+          <div class="info-item"><div class="info-dot"></div> Weekdays, 5:00 – 7:00 PM</div>
+        </div>
+
+        <div style="margin-top: 24px; background: var(--white); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.15rem; font-weight:600; color:var(--slate); margin-bottom:12px;">Fees</h4>
+          <div style="display:flex; flex-direction:column; gap:8px; font-size:.9rem; color:var(--slate-mid);">
+            <div style="display:flex; justify-content:space-between;"><span>Initial Intake (60 min)</span><strong style="color:var(--slate);">$230</strong></div>
+            <div style="display:flex; justify-content:space-between;"><span>Individual Therapy (50–55 min)</span><strong style="color:var(--slate);">$200</strong></div>
+          </div>
+          <p style="font-size:.8rem; color:var(--slate-soft); margin-top:12px; line-height:1.6;">I am an out-of-network provider and can provide a superbill for possible insurance reimbursement.</p>
+        </div>
+      </div>
+
+      <div class="booking-form">
+        <h3>Request a Phone Consultation</h3>
+        <form id="consultForm" action="https://formspree.io/f/mykqjejw" method="POST">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="firstName" id="firstName" placeholder="Jane" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="lastName" id="lastName" placeholder="Smith" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" id="email" placeholder="jane@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" id="phone" placeholder="+1 (000) 000 0000" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Day</label>
+              <select name="preferredDay" id="prefDay" required>
+                <option value="">Select a day</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Preferred Time</label>
+              <select name="preferredTime" id="prefTime" required>
+                <option value="">Select a time</option>
+                <option>5:00 PM</option>
+                <option>5:30 PM</option>
+                <option>6:00 PM</option>
+                <option>6:30 PM</option>
+                <option>7:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Language</label>
+            <select name="preferredLanguage" id="langPref">
+              <option value="">Select language</option>
+              <option>English</option>
+              <option>中文</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>What brings you here? (optional)</label>
+            <textarea name="message" id="message" placeholder="Feel free to share as much or as little as you'd like..."></textarea>
+          </div>
+
+          <button type="submit" class="gcal-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+            Submit Consultation Request
+          </button>
+          <div class="gcal-note">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Your information is handled with complete confidentiality.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OUTSIDE THE OFFICE ─── -->
+<section id="personal" style="background: var(--white); padding-top: 48px; padding-bottom: 48px;">
+  <div class="container">
+    <div class="section-label">Outside the Office</div>
+    <h2 class="section-title">A little about me beyond work</h2>
+
+    <div class="lang-tabs" data-group="personal">
+      <button class="lang-tab active" data-lang="en">English</button>
+      <button class="lang-tab" data-lang="zh-tw">繁體中文</button>
+      <button class="lang-tab" data-lang="zh-cn">简体中文</button>
+    </div>
+
+    <div class="lang-content active" data-group="personal" data-lang="en">
+      <div style="display:flex; gap: 24px; flex-wrap: wrap; margin-top: 16px;">
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🎨</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">Drawing & Art</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">Creative expression as a way to slow down and connect with the present moment.</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🎵</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">Music</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">Listening and playing as a source of comfort, energy, and emotional connection.</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">✈️</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">Travel & Culture</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">Learning about different cultures and appreciating the diversity of human experience.</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🌿</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">Nature & Reflection</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">Quiet moments outdoors, finding stillness and perspective in the natural world.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lang-content" data-group="personal" data-lang="zh-tw">
+      <div style="display:flex; gap: 24px; flex-wrap: wrap; margin-top: 16px;">
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🎨</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">畫畫與藝術</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">透過創作放慢步調，與當下連結。</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🎵</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">音樂</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">聆聽與演奏，作為舒適、能量與情感連結的來源。</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">✈️</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">旅行與文化</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">認識不同文化，欣賞人類經驗的多樣性。</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🌿</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">自然與沉思</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">安靜地欣賞自然與生活中的片刻。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lang-content" data-group="personal" data-lang="zh-cn">
+      <div style="display:flex; gap: 24px; flex-wrap: wrap; margin-top: 16px;">
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🎨</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">画画与艺术</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">通过创作放慢步调，与当下连结。</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🎵</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">音乐</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">聆听与演奏，作为舒适、能量与情感连结的来源。</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">✈️</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">旅行与文化</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">认识不同文化，欣赏人类经验的多样性。</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background: var(--bg); border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--sky-light);">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">🌿</div>
+          <h4 style="font-family:'Cormorant Garant',serif; font-size:1.1rem; font-weight:600; margin-bottom:4px; color:var(--slate);">自然与沉思</h4>
+          <p style="font-size:.85rem; color:var(--slate-soft); line-height:1.6;">安静地欣赏自然与生活中的片刻。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <strong>Dr. Wenhsin Chang</strong> · Licensed Psychologist · California<br>
+  <br>
+  <span style="font-size:.75rem; opacity:.6;">This site is for informational purposes only and does not constitute medical advice. If you are in crisis, please contact the 988 Suicide &amp; Crisis Lifeline by calling or texting <strong style="color:rgba(255,255,255,.7)">988</strong>.</span>
+</footer>
+
+<!-- ─── TOAST ─── -->
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toastMsg">Booking request sent!</span>
+</div>
+
+<!-- ─── SCRIPT ─── -->
+<script>
+  // Language tab switching
+  document.addEventListener('click', function(e) {
+    const tab = e.target.closest('.lang-tab');
+    if (!tab) return;
+
+    const group = tab.parentElement.dataset.group;
+    const lang = tab.dataset.lang;
+
+    tab.parentElement.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    document.querySelectorAll('.lang-content[data-group="' + group + '"]').forEach(c => {
+      if (c.dataset.lang === lang) {
+        c.classList.add('active');
+      } else {
+        c.classList.remove('active');
+      }
+    });
+  });
+
+
+  function showToast(msg, duration = 4000) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+  }
+
+  // Handle form submission via Formspree
+  document.getElementById('consultForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        showToast('Request sent! Dr. Wenhsin Chang will be in touch within 1–2 business days.', 6000);
+        form.reset();
+      } else {
+        showToast('Something went wrong. Please try again or email directly.', 5000);
+      }
+    } catch (err) {
+      showToast('Network error. Please check your connection and try again.', 5000);
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Submit Consultation Request';
+  });
+
+  // Smooth active nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--sage-dark)';
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
